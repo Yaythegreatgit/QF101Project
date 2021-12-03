@@ -122,9 +122,7 @@ def calculateReturn(portfolio, starttime, endtime):
             print("Error occurred reading " + str(stock) + " Skipping...")
     return returns
 
-# SET UP FOR PORTFOLIO AND  TIMES.
-start = datetime.datetime(2019, 1, 1)
-end = datetime.datetime(2021, 10, 20)
+
 
 #Random sample of iterations, using index over time period from start to end
 #size range of portfolio supported
@@ -147,7 +145,7 @@ def runTests(iter, index, start, end):
         no_bags += [numberOfBags(tenbaggers)]
         no_tenbaggers += [len(tenbaggers)]
         averages += [sum(Returns.values())/n]
-        print(i)
+        print(i) #Counter so we know how far the test have progressed
     return pd.DataFrame({'Size':sizes, 'Number of 10 Baggers':no_tenbaggers, 'Number of Bags':no_bags, 'Actual Return':averages})
 
 #Generating graphs for fake portfolio
@@ -184,10 +182,14 @@ def fakeprintgraphs():
     plt.plot(varB, varC)
     plt.show()
 
+#Some ways to utilize function, remove and add #'s as necessary.
+# SET UP TIMES.
+start = datetime.datetime(2019, 1, 1)
+end = datetime.datetime(2021, 10, 20)
 #Run testdata
-#result = runTests(10, "Russell", start, end)
-#Export to excel for expert analysis
-#result.to_excel(r'C:\Users\yiann\github\QF101Project\results.xlsx', index = False)
+result = runTests(10, "SP", start, end)
+#Export to excel for expert analysis, will be put in same folder as this python file.
+result.to_excel('results.xlsx', index = False)
 
 #Generating a specific profile
 #stocks = ["AMZN", "NVDA", "WMT", "HSY", "ETSY", "CMCSA", "DIS", "KR", "HAS", "MAT"]
